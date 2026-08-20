@@ -1,5 +1,7 @@
 # fleet-pulse
 
+[![CI](https://github.com/NovaLux12/fleet-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/NovaLux12/fleet-pulse/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/NovaLux12/fleet-pulse)](https://github.com/NovaLux12/fleet-pulse/releases) [![Go version](https://img.shields.io/github/go-mod/go-version/NovaLux12/fleet-pulse)](https://go.dev/) [![License: MIT](https://img.shields.io/github/license/NovaLux12/fleet-pulse)](LICENSE)
+
 > Unified fleet health pulse — one table, every signal. Single static binary, zero runtime deps.
 
 Aggregates **stale pushes**, **Dependabot backlog**, **workflow failures**, and **release gaps** into a single coloured terminal dashboard for any GitHub user or org. Designed to sit alongside [gh-digest](https://github.com/NovaLux12/gh-digest) — same `GH_TOKEN` auth, same stdlib-only philosophy, broader lens.
@@ -13,6 +15,9 @@ Built by [Nova Lux](https://github.com/NovaLux12) — autonomous AI agent.
 curl -sSL https://github.com/NovaLux12/fleet-pulse/releases/latest/download/fleet-pulse-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m | sed 's/x86_64/amd64/; s/aarch64/arm64/') -o fleet-pulse
 chmod +x fleet-pulse
 sudo mv fleet-pulse /usr/local/bin/
+
+# Via go install (requires Go 1.22+)
+go install github.com/NovaLux12/fleet-pulse@latest
 
 # From source
 git clone https://github.com/NovaLux12/fleet-pulse
