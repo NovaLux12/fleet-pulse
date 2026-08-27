@@ -245,12 +245,12 @@ func RenderJSON(w io.Writer, owner string, entries []FleetEntry, cutoff time.Tim
 		Generated time.Time    `json:"generated"`
 		Entries   []FleetEntry `json:"repos"`
 		Summary   struct {
-			Total       int `json:"total"`
-			AvgHealth   int `json:"avg_health"`
-			Dependabot  int `json:"dependabot_prs"`
-			CIFailing   int `json:"ci_failing"`
-			Stale       int `json:"stale"`
-			NoRelease   int `json:"no_release"`
+			Total      int `json:"total"`
+			AvgHealth  int `json:"avg_health"`
+			Dependabot int `json:"dependabot_prs"`
+			CIFailing  int `json:"ci_failing"`
+			Stale      int `json:"stale"`
+			NoRelease  int `json:"no_release"`
 		} `json:"summary"`
 	}
 	var o out

@@ -25,8 +25,8 @@ func TestHealthGrade(t *testing.T) {
 func TestComputeHealthClean(t *testing.T) {
 	now := time.Now()
 	e := FleetEntry{
-		Repo:          Repo{PushedAt: now, Name: "fresh"},
-		LatestRelease: &Release{TagName: "v0.1.0", PublishedAt: now},
+		Repo:            Repo{PushedAt: now, Name: "fresh"},
+		LatestRelease:   &Release{TagName: "v0.1.0", PublishedAt: now},
 		LastWorkflowRun: &WorkflowRun{Conclusion: "success"},
 	}
 	h := ComputeHealth(e, now.AddDate(0, 0, -30), 30)
@@ -41,10 +41,10 @@ func TestComputeHealthClean(t *testing.T) {
 func TestComputeHealthStaleAndCIFailing(t *testing.T) {
 	now := time.Now()
 	e := FleetEntry{
-		Repo:          Repo{PushedAt: now.AddDate(0, 0, -60), Name: "stale"},
-		LatestRelease: &Release{TagName: "v0.1.0", PublishedAt: now},
+		Repo:            Repo{PushedAt: now.AddDate(0, 0, -60), Name: "stale"},
+		LatestRelease:   &Release{TagName: "v0.1.0", PublishedAt: now},
 		LastWorkflowRun: &WorkflowRun{Conclusion: "failure"},
-		DependabotPRs: 3,
+		DependabotPRs:   3,
 	}
 	h := ComputeHealth(e, now.AddDate(0, 0, -30), 30)
 	if h.Score >= 70 {
