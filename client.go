@@ -48,21 +48,21 @@ type WorkflowRun struct {
 
 // FleetEntry aggregates every signal for one repo.
 type FleetEntry struct {
-	Repo              Repo         `json:"repo"`
-	OpenIssues        int          `json:"open_issues"`
-	OpenPRs           int          `json:"open_prs"`
-	DependabotPRs     int          `json:"dependabot_prs"`
-	LatestRelease     *Release     `json:"latest_release"`
-	LatestReleaseErr  string       `json:"latest_release_err,omitempty"`
-	LastWorkflowRun   *WorkflowRun `json:"last_workflow_run"`
-	WorkflowErr       string       `json:"workflow_err,omitempty"`
-	Health            HealthScore  `json:"health"`
+	Repo             Repo         `json:"repo"`
+	OpenIssues       int          `json:"open_issues"`
+	OpenPRs          int          `json:"open_prs"`
+	DependabotPRs    int          `json:"dependabot_prs"`
+	LatestRelease    *Release     `json:"latest_release"`
+	LatestReleaseErr string       `json:"latest_release_err,omitempty"`
+	LastWorkflowRun  *WorkflowRun `json:"last_workflow_run"`
+	WorkflowErr      string       `json:"workflow_err,omitempty"`
+	Health           HealthScore  `json:"health"`
 }
 
 // HealthScore summarises a FleetEntry into a single grade.
 type HealthScore struct {
-	Score  int      `json:"score"`  // 0-100
-	Grade  string   `json:"grade"`  // A/B/C/D/F
+	Score   int      `json:"score"` // 0-100
+	Grade   string   `json:"grade"` // A/B/C/D/F
 	Reasons []string `json:"reasons,omitempty"`
 }
 
@@ -219,14 +219,13 @@ func (c *Client) LatestRelease(owner, repo string) (*Release, error) {
 	return &r, nil
 }
 
-// LatestWorkflowRun returns the most recent workflow run on the default branch, or nil.
+// LatestWorkflowRun returns the most recent workflow run across all branches, or nil.
 func (c *Client) LatestWorkflowRun(owner, repo string) (*WorkflowRun, error) {
 	var resp struct {
 		Runs []WorkflowRun `json:"workflow_runs"`
 	}
 	q := url.Values{}
 	q.Set("per_page", "1")
-	q.Set("branch", "")
 	err := c.get(fmt.Sprintf("/repos/%s/%s/actions/runs", owner, repo), &resp, q)
 	if err != nil {
 		if IsNotFound(err) {

@@ -9,7 +9,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
@@ -168,13 +167,10 @@ func main() {
 
 	switch *format {
 	case "json":
-		// Use RenderJSON for consistent envelope.
 		if err := RenderJSON(os.Stdout, *owner, entries, cutoff); err != nil {
 			fmt.Fprintf(os.Stderr, "error rendering json: %v\n", err)
 			os.Exit(1)
 		}
-		// Also support raw entries dump when piped — but envelope is the contract.
-		_ = json.RawMessage{}
 	case "markdown":
 		RenderMarkdown(os.Stdout, *owner, entries, cutoff)
 	default:
