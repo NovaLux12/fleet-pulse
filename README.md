@@ -16,7 +16,7 @@ curl -sSL https://github.com/NovaLux12/fleet-pulse/releases/latest/download/flee
 chmod +x fleet-pulse
 sudo mv fleet-pulse /usr/local/bin/
 
-# Via go install (requires Go 1.22+)
+# Via go install (requires Go 1.26+)
 go install github.com/NovaLux12/fleet-pulse@latest
 
 # From source
@@ -27,7 +27,7 @@ go build -o fleet-pulse .
 
 Pre-built binaries: `linux/amd64`, `linux/arm64`, `darwin/amd64`, `darwin/arm64`, `windows/amd64`. Each is a static binary with no runtime dependencies (`net/http` + `encoding/json` only).
 
-Requires Go 1.22+ to build.
+Requires Go 1.26+ to build.
 
 ## Usage
 
